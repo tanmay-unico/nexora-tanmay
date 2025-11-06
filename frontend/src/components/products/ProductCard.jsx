@@ -73,17 +73,16 @@ const ProductCard = ({
       style={{
         '--product-accent': theme.accent,
         '--product-accent-secondary': theme.accentSecondary,
-        '--product-gradient': theme.gradient,
       }}
     >
-      <div className="product-card__badge">{theme.badge}</div>
       <figure className="product-card__media">
-        <div className="product-card__glow" aria-hidden="true" />
+        <div className="product-card__badge">{theme.badge}</div>
         <img
           src={product.imageUrl}
           alt={product.name}
           loading="lazy"
           onError={handleImageError}
+          className="product-card__image"
         />
       </figure>
       <div className="product-card__body">

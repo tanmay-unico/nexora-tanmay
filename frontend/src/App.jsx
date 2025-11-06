@@ -30,24 +30,41 @@ function App() {
     updateCheckoutField,
     closeReceipt,
     isProcessingItem,
+    formatCurrency,
   } = useStorefront();
 
   if (loading) {
     return <LoadingState apiEndpoint={apiBaseUrl} />;
   }
 
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const cartTotalLabel = formatCurrency(cartTotal);
+
   return (
     <AppShell>
-      <HeroHeader />
+      <header className="store-header">
+        <div className="store-header__brand">Nexora Market</div>
+        <nav className="store-header__nav" aria-label="Primary">
+          <a href="#products">Shop</a>
+          <a href="#cart">Cart</a>
+          <a href="mailto:support@nexora.shop">Support</a>
+        </nav>
+        <div className="store-header__cart" aria-live="polite">
+          <span>{totalItems} {totalItems === 1 ? 'item' : 'items'} in cart</span>
+          <span className="store-header__total">{cartTotalLabel}</span>
+        </div>
+      </header>
+
+      <HeroHeader cartQuantity={totalItems} cartTotalLabel={cartTotalLabel} />
 
       {error && <InlineBanner tone="error" message={error} />}
 
       <main className="content-grid">
-        <section className="section section--products">
+        <section className="section section--products" id="products">
           <div className="section__header">
-            <h2>Featured goods</h2>
-            <p>Limited runs from artisan makers and modern studios.</p>
-      </div>
+            <h2>Featured products</h2>
+            <p>Shop customer-loved staples ready to ship today.</p>
+          </div>
           <ProductGrid
             products={products}
             cartItems={cartItems}
@@ -59,11 +76,11 @@ function App() {
           />
         </section>
 
-        <aside className="section section--cart">
+        <aside className="section section--cart" id="cart">
           <div className="section__header section__header--compact">
             <h2>Your cart</h2>
             <span>{cartItems.length} {cartItems.length === 1 ? 'item' : 'items'}</span>
-      </div>
+          </div>
 
           {isCartEmpty ? (
             <EmptyState

@@ -1,9 +1,4 @@
-const AppShell = ({ children }) => (
-  <div className="app-shell">
-    <div className="app-shell__bg" aria-hidden="true" />
-    <div className="app-shell__content">{children}</div>
-  </div>
-);
+const AppShell = ({ children }) => <div className="app-shell">{children}</div>;
 
 export default AppShell;
 
