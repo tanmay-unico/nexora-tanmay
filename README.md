@@ -58,8 +58,3 @@ npm run build
 
 Static assets will be emitted to `frontend/dist/`.
 
-### Contributing
-
-Feel free to open issues or submit pull requests on GitHub. Suggestions for UX improvements, accessibility tweaks, or additional product data are always welcome.
-
-
